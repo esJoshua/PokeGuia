@@ -39,7 +39,10 @@
                 v-else
               />
             </div>
-            <div class="col-12 my-4">
+            <!-- :class="{
+                'charmander-style': inputPoke.toLowerCase() == 'charmander',
+              }" -->
+            <div class="col-12 my-4" :class="typeClass">
               <div>
                 <h2>
                   <strong>{{ titleMove }}</strong>
@@ -121,6 +124,28 @@ export default {
       );
       return abilities;
     },
+    typePoke() {
+      const type = this.pokeData?.types[0].type.name;
+      return type;
+    },
+    typeClass() {
+      return {
+        typeElectric: this.typePoke == "electric",
+        typeFire: this.typePoke == "fire",
+        typeWater: this.typePoke == "water",
+        typeGrass: this.typePoke == "grass",
+        typeBug: this.typePoke == "bug",
+        typePoison: this.typePoke == "poison",
+        typeGround: this.typePoke == "ground",
+        typeFairy: this.typePoke == "fairy",
+        typeNormal: this.typePoke == "normal",
+        typeFighting: this.typePoke == "fighting",
+        typePsychic: this.typePoke == "psychic",
+        typeRock: this.typePoke == "rock",
+        typeFlying: this.typePoke == "flying",
+        typeIce: this.typePoke == "ice",
+      };
+    },
   },
 
   methods: {
@@ -132,6 +157,7 @@ export default {
         const data = await req.json();
         this.pokeData = data;
         console.log(this.pokeData);
+        console.log(this.pokeData.types[0].type.name);
       } catch (error) {
         console.error(error);
         this.inputPoke = "";
@@ -166,6 +192,7 @@ body {
 }
 h1 {
   color: orange;
+  text-shadow: 2px 2px #ff0000;
 }
 h2 {
   text-decoration: underline overline;
@@ -173,5 +200,52 @@ h2 {
 p {
   margin: 0;
   font-weight: 600;
+}
+.charmander-style {
+  color: red;
+}
+
+.typeElectric {
+  color: #f7d02c;
+}
+.typeFire {
+  color: red;
+}
+.typeWater {
+  color: blue;
+}
+.typeGrass {
+  color: green;
+}
+.typeBug {
+  color: #a6b91a;
+}
+.typePoison {
+  color: purple;
+}
+.typeGround {
+  color: #e2bf65;
+}
+.typeFairy {
+  color: #d685ad;
+}
+.typeNormal {
+  color: #a8a77a;
+}
+.typeFighting {
+  color: #c22e28;
+}
+.typePsychic {
+  color: #f95587;
+}
+
+.typeRock {
+  color: #b6a136;
+}
+.typeFlying {
+  color: #a98ff3;
+}
+.typeIce {
+  color: #96d9d6;
 }
 </style>
