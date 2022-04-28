@@ -2,74 +2,61 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <div>
-          <div class="col-12">
-            <h1>{{ title }}</h1>
-          </div>
-          <div class="d-flex col-12 justify-content-center align-items-center">
-            <p class="mx-2">Nombre</p>
-            <input
-              class="text-center p-1"
-              type="text"
-              placeholder="del Pokemon"
-              v-model="inputPoke"
-              @keyup.enter="findPoke"
-            />
-            <button
-              class="btn btn-light mx-2 p-1"
-              type="button"
-              @click="findPoke"
-            >
-              Buscar
-            </button>
-          </div>
-          <!--  -->
-          <div v-if="pokeData">
-            <div class="col-12 my-4">
-              <img
-                :src="imgPoke"
-                :alt="namePoke"
-                height="200px"
-                v-if="imgPoke"
-              />
-              <img
-                :src="URL_notFound"
-                height="300px"
-                alt="Imagen no encontrada"
-                v-else
-              />
-            </div>
-            <!-- :class="{
-                'charmander-style': inputPoke.toLowerCase() == 'charmander',
-              }" -->
-            <div class="col-12 my-4" :class="typeClass">
-              <div>
-                <h2>
-                  <strong>{{ titleMove }}</strong>
-                </h2>
-                <p v-for="(move, i) of movesPoke" :key="i">
-                  {{ move }}
-                </p>
-              </div>
-              <div class="my-4">
-                <h2>
-                  <strong>{{ titleAbility }}</strong>
-                </h2>
-                <p v-for="(ability, i) of abilityPoke" :key="i">
-                  {{ ability }}
-                </p>
-              </div>
-            </div>
-          </div>
-          <!--  -->
-          <div class="m-4" v-else>
-            <h2>Pokemon <b>NO</b> encontrado, intenta con otro nombre</h2>
+        <div class="title-container col-12">
+          <h1>{{ title }}</h1>
+        </div>
+        <div
+          class="d-flex col-12 justify-content-center align-items-center nowrap"
+        >
+          <input
+            class="text-center p-1"
+            type="text"
+            placeholder="Nombre del Pokemon"
+            v-model="inputPoke"
+            @keyup.enter="findPoke"
+          />
+          <button
+            class="btn btn-light mx-2 p-1"
+            type="button"
+            @click="findPoke"
+          >
+            Buscar
+          </button>
+        </div>
+        <!--  -->
+        <div v-if="pokeData">
+          <div class="col-12 my-4">
+            <img :src="imgPoke" :alt="namePoke" height="200px" v-if="imgPoke" />
             <img
               :src="URL_notFound"
               height="300px"
-              alt="Pokemon no encontrado"
+              alt="Imagen no encontrada"
+              v-else
             />
           </div>
+          <div class="description-container col-12 my-4" :class="typeClass">
+            <div>
+              <h2>
+                <strong>{{ titleMove }}</strong>
+              </h2>
+              <p v-for="(move, i) of movesPoke" :key="i">
+                {{ move }}
+              </p>
+            </div>
+            <div class="my-4">
+              <h2>
+                <strong>{{ titleAbility }}</strong>
+              </h2>
+              <p v-for="(ability, i) of abilityPoke" :key="i">
+                {{ ability }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="m-4" v-else>
+          <h2>Pokemon <b>NO</b> encontrado, intenta con otro nombre</h2>
+          <img :src="URL_notFound" height="300px" alt="Pokemon no encontrado" />
         </div>
       </div>
     </div>
@@ -188,11 +175,17 @@ body {
   background-size: cover;
 }
 .container {
-  margin-top: 4rem;
+  margin-top: 8rem;
+}
+.title-container {
+  max-width: 15rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 h1 {
-  color: orange;
-  text-shadow: 2px 2px #ff0000;
+  color: white;
+  text-shadow: 2px 2px black;
+  box-shadow: 0 0 70px 15px #1adb6ac5;
 }
 h2 {
   text-decoration: underline overline;
@@ -201,8 +194,11 @@ p {
   margin: 0;
   font-weight: 600;
 }
-.charmander-style {
-  color: red;
+.description-container {
+  max-width: 17rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(5, 5, 5, 0.5);
 }
 
 .typeElectric {
